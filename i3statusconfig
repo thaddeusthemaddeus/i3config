@@ -1,0 +1,64 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+     		
+}
+order += "volume master"
+order += "disk /"
+order += "disk /mnt/ssd"
+order += "disk /mnt/games"
+order += "ethernet _first_"
+order += "wireless _first_"
+order += ""
+order += "path_exists VPN"
+order += "load"
+order += "cpu_usage"
+order += "volume pcm"
+order += "tztime local"
+
+
+ethernet _first_ {
+        # if you use %speed, i3status requires root privileges
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+wireless _first_ {
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
+}
+path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        path = "/proc/sys/net/ipv4/conf/tun0"
+}
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+load {
+        format = "%1min 1 %5min 5 %15min 15"
+}
+disk "/" {
+        format = "%free root"
+}
+disk "/home/thaddeus/mount/data" {
+        format = "%free data"
+}
+disk "/mnt/games" {
+        format = "%free games"
+}
+disk "/mnt/ssd" {
+        format = "%free ssd"
+}
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
